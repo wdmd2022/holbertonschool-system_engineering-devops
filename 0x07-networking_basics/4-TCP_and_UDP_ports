@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# this script returns open ports w/ their PIDs
+
+netstat -lp
