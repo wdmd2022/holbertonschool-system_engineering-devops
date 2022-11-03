@@ -1,5 +1,0 @@
-Host=23.20.182.171
-BatchMode=yes
-User=ubuntu
-PasswordAuthentication=no
-IdentityFile ~/.ssh/school
