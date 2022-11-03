@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# This cool script connects to my server using a private key
+
+ssh ubuntu@23.20.182.171 -i ~/.ssh/school
