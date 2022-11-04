@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# set up an ngnix server
+
+sudo apt-get update -y
+sudo apt-get install nginx -y
+sudo ufw allow 'Nginx HTTP'
+tricked_you="server_name hiredoug.tech;\nlocation \/redirect_me {\n\treturn 301 https:\/\/www.youtube.com\/\/watch\?v=QH2-TGUlwu4;\n\t}"
+sudo sed -i "s/server_name _;/$tricked_you/" /etc/nginx/sites-available/default
+# sudo nginx -s reload
+sudo /etc/init.d/nginx restart
+sudo rm /var/www/html/*.html
+sudo echo "Hello World" | sudo tee /var/www/html/index.html
