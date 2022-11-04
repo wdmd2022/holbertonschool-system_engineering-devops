@@ -4,7 +4,7 @@
 sudo apt-get update -y
 sudo apt-get install nginx -y
 sudo ufw allow 'Nginx HTTP'
-tricked_you="\tserver_name hiredoug.tech;\nlocation \/redirect_me {\n\treturn 301 https:\/\/www.youtube.com\/\/watch\?v=QH2-TGUlwu4;\n\t}"
+tricked_you="\tserver_name hiredoug.tech;\n\tlocation \/redirect_me {\n\treturn 301 https:\/\/www.youtube.com\/\/watch\?v=QH2-TGUlwu4;\n\t}"
 sudo sed -i "s|^\tserver_name _;|$tricked_you|" /etc/nginx/sites-available/default
 # sudo nginx -s reload
 sudo /etc/init.d/nginx restart
