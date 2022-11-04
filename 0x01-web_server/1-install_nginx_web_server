@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # set up an ngnix server
 
-apt-get update -y
-apt-get install nginx -y
-ufw allow 'Nginx HTTP'
-nginx -g "listen"
-nginx -s reload # reloads it so the configuration changes take effect
+sudo apt-get update -y
+sudo apt-get install nginx -y
+sudo ufw allow 'Nginx HTTP'
+sudo nginx -s reload
+sudo rm /var/www/html/*.html
+sudo echo "Hello World" | sudo tee /var/www/html/index.html
