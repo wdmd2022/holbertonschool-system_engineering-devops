@@ -7,3 +7,4 @@ sudo ufw allow 'Nginx HTTP'
 sudo nginx -s reload
 sudo rm /var/www/html/*.html
 sudo echo "Hello World" | sudo tee /var/www/html/index.html
+sudo nginx -s reload
