@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2154
+# this script sets up a custom response header for our servers
+
+sudo apt-get update -y
+sudo apt-get install nginx -y
+sudo ufw allow 'Nginx HTTP'
+sudo nginx -s reload
+sudo rm /var/www/html/*.html
+sudo echo "Hello World" | sudo tee /var/www/html/index.html
+sudo echo "Ceci n'est pas une page" | sudo tee /var/www/html/error404.html
+tricked_you="\tserver_name _;\n\tlocation \/redirect_me {\n\treturn 301 https:\/\/www.youtube.com\/\/watch\?v=QH2-TGUlwu4;\n\t}"
+sudo sed -i "s|^\tserver_name _;|$tricked_you|" /etc/nginx/sites-available/default
+insertat="^\tlocation / {"
+wrongpage="\terror_page 404 /error404.html;\n\n\tlocation / {"
+sudo sed -i "s|$insertat|$wrongpage|" /etc/nginx/sites-available/default
+prehead="^\tlisten [::]:80 default_server;"
+posthead="\tlisten [::]:80 default_server;\n\tadd_header X-Served-By '$HOSTNAME';"
+sudo sed -i "s|$prehead|$posthead|" /etc/nginx/sites-available/default
+sudo /etc/init.d/nginx restart
