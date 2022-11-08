@@ -13,8 +13,8 @@ tricked_you="\tserver_name _;\n\tlocation \/redirect_me {\n\treturn 301 https:\/
 sudo sed -i "s|^\tserver_name _;|$tricked_you|" /etc/nginx/sites-available/default
 insertat="^\tlocation / {"
 wrongpage="\terror_page 404 /error404.html;\n\n\tlocation / {"
-sudo sed -i "s|$insertat|$wrongpage|"
+sudo sed -i "s|$insertat|$wrongpage|" /etc/nginx/sites-available/default
 prehead="^\tlisten [::]:80 default_server;"
 posthead="${prehead}\n\tadd_header X-Served-By '$HOSTNAME';"
-sudo sed-i "s|$prehead|$posthead|" /etc/nginx/sites-available/default
+sudo sed -i "s|$prehead|$posthead|" /etc/nginx/sites-available/default
 sudo /etc/init.d/nginx restart
