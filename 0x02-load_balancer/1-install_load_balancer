@@ -1,2 +1,9 @@
 #!/usr/bin/env bash
 # this script configures a load balancer
+
+sudo apt-get update -y && sudo apt-get upgrade -y
+sudo apt-get install haproxy
+configmorelikecoolfig="frontend http_web\n\tbind *:80\n\tmode http\n\tdefault_backend web_backend\nbackend web_backend\n\tbalance roundrobin\n\toption forwardfor\n\tserver 4939-web-01 23.20.182.171:80 check\n\tserver 4939-web-02 34.207.205.130:80 check"
+echo -e $configmorelikecoolfig | sudo tee -a /etc/haproxy/haproxy.cfg
+echo ENABLED=1 | sudo tee -a /etc/default/haproxy
+sudo service haproxy start
