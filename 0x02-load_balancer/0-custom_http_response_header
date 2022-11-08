@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2154
 # this script sets up a custom response header for our servers
 
 sudo apt-get update -y
@@ -14,6 +15,6 @@ insertat="^\tlocation / {"
 wrongpage="\terror_page 404 /error404.html;\n\n\tlocation / {"
 sudo sed -i "s|$insertat|$wrongpage|"
 prehead="^\tlisten [::]:80 default_server;"
-posthead="$prehead" + "\n\tadd_header X-Served-By '$HOSTNAME';"
+posthead="${prehead}\n\tadd_header X-Served-By '$HOSTNAME';"
 sudo sed-i "s|$prehead|$posthead|" /etc/nginx/sites-available/default
 sudo /etc/init.d/nginx restart
