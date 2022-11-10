@@ -3,7 +3,16 @@
 
 sudo apt-get update -y && sudo apt-get upgrade -y
 sudo apt-get install haproxy
-configmorelikecoolfig="frontend http_web\n\tbind *:80\n\tmode http\n\tdefault_backend web_backend\nbackend web_backend\n\tbalance roundrobin\n\toption forwardfor\n\tserver 4939-web-01 23.20.182.171:80 check\n\tserver 4939-web-02 34.207.205.130:80 check"
-echo -e $configmorelikecoolfig | sudo tee -a /etc/haproxy/haproxy.cfg
-echo ENABLED=1 | sudo tee -a /etc/default/haproxy
+echo "
+frontend http_web
+    bind *:80
+    mode http
+    default_backend web_backend
+    
+backend web_backend
+    balance roundrobin
+    option forwardfor
+    server 4939-web-01 23.20.182.171:80 check
+    server 4939-web-02 34.207.205.130:80 check" | sudo tee -a /etc/haproxy/haproxy.cfg
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
 sudo service haproxy start
