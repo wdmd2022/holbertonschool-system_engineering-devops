@@ -2,7 +2,7 @@
 # this script configures a load balancer
 
 sudo apt-get update -y && sudo apt-get upgrade -y
-sudo apt-get install haproxy
+sudo apt-get install haproxy -y
 echo "
 frontend http_web
     bind *:80
