@@ -17,4 +17,5 @@ sudo sed -i "s|$insertat|$wrongpage|" /etc/nginx/sites-available/default
 prehead="^\tlisten [::]:80 default_server;"
 posthead="${prehead}\n\tadd_header X-Served-By '$HOSTNAME';"
 sudo sed -i "s|$prehead|$posthead|" /etc/nginx/sites-available/default
-sudo /etc/init.d/nginx restart
+sudo service nginx restart
+sudo service nginx reload
